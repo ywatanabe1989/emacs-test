@@ -1,18 +1,43 @@
 * Test Results Summary
 
-- Passed: 22
-- Failed: 1
+- Passed: 48
+- Failed: 0
 - Skipped: 0
 - Timeout: 0
-- Duplicates: 0
-- Total: 23
-- Success Rate: 95.7%
+- Duplicates: 1
+- Total: 48
+- Success Rate: 100.0%
 
 ** Passed Tests
-- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-find.el::test--et-find-deftest-file][test-elisp-test-find.el]] :: test--et-find-deftest-file
+- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-find.el::test--et-find-deftest-file][test-elisp-test-find.el]] :: test--et-find-deftest-file [DUPLICATE]
+- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-find.el::test--et-find-deftest][test-elisp-test-find.el]] :: test--et-find-deftest
+- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-find.el::test--et-find-deftest-file][test-elisp-test-find.el]] :: test--et-find-deftest-file [DUPLICATE]
+- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-find.el::test-et-find-test-files-exclude][test-elisp-test-find.el]] :: test-et-find-test-files-exclude
+- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-find.el::test-et-find-test-files-directory][test-elisp-test-find.el]] :: test-et-find-test-files-directory
+- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-find.el::test-et-find-test-files-single-file][test-elisp-test-find.el]] :: test-et-find-test-files-single-file
+- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-loadpath.el::test-et-add-load-paths-handles-multiple-paths][test-elisp-test-loadpath.el]] :: test-et-add-load-paths-handles-multiple-paths
+- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-loadpath.el::test-et-add-load-paths-adds-to-load-path][test-elisp-test-loadpath.el]] :: test-et-add-load-paths-adds-to-load-path
+- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-loadpath.el::test-et-add-load-paths-adds-to-et-loadpath][test-elisp-test-loadpath.el]] :: test-et-add-load-paths-adds-to-et-loadpath
 - [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-main.el::test-et-test-function][test-elisp-test-main.el]] :: test-et-test-function
+- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-parse.el::test-et--parse-test-result-mixed][test-elisp-test-parse.el]] :: test-et--parse-test-result-mixed
+- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-parse.el::test-et--parse-test-result-skipped][test-elisp-test-parse.el]] :: test-et--parse-test-result-skipped
+- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-parse.el::test-et--parse-test-result-failed][test-elisp-test-parse.el]] :: test-et--parse-test-result-failed
+- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-parse.el::test-et--parse-test-result-passed][test-elisp-test-parse.el]] :: test-et--parse-test-result-passed
+- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-parse.el::test-et--parse-test-result-not-found][test-elisp-test-parse.el]] :: test-et--parse-test-result-not-found
+- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-parse.el::test-et--parse-test-result-error][test-elisp-test-parse.el]] :: test-et--parse-test-result-error
+- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-parse.el::test-et--parse-test-result-timeout][test-elisp-test-parse.el]] :: test-et--parse-test-result-timeout
 - [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-path.el::test-et-add-load-paths-multiple][test-elisp-test-path.el]] :: test-et-add-load-paths-multiple
 - [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-path.el::test-et-add-load-paths-single][test-elisp-test-path.el]] :: test-et-add-load-paths-single
+- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-plan.el::test-et--prepare-test-plan-returns-tests][test-elisp-test-plan.el]] :: test-et--prepare-test-plan-returns-tests
+- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-plan.el::test-et--prepare-test-plan-buffer-mode][test-elisp-test-plan.el]] :: test-et--prepare-test-plan-buffer-mode
+- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-plan.el::test-et--prepare-test-plan-empty-paths][test-elisp-test-plan.el]] :: test-et--prepare-test-plan-empty-paths
+- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-report.el::test-et--insert-test-section-basic][test-elisp-test-report.el]] :: test-et--insert-test-section-basic
+- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-report.el::test-et--insert-summary-basic][test-elisp-test-report.el]] :: test-et--insert-summary-basic
+- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-report.el::test-et--count-duplicates-one][test-elisp-test-report.el]] :: test-et--count-duplicates-one
+- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-report.el::test-et--count-duplicates-none][test-elisp-test-report.el]] :: test-et--count-duplicates-none
+- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-report.el::test-et--count-results-failed][test-elisp-test-report.el]] :: test-et--count-results-failed
+- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-report.el::test-et--count-results-passed][test-elisp-test-report.el]] :: test-et--count-results-passed
+- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-report.el::test-et--count-results-empty][test-elisp-test-report.el]] :: test-et--count-results-empty
 - [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-run.el::test-et--run-multiple-test-basic][test-elisp-test-run.el]] :: test-et--run-multiple-test-basic
 - [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-run.el::test-et--run-single-test-timeout][test-elisp-test-run.el]] :: test-et--run-single-test-timeout
 - [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-run.el::test-et--run-single-test-success][test-elisp-test-run.el]] :: test-et--run-single-test-success
@@ -33,8 +58,5 @@
 - [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test.el::test-elisp-test-variables-loadable][test-elisp-test.el]] :: test-elisp-test-variables-loadable
 - [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test.el::test-elisp-test-loadable][test-elisp-test.el]] :: test-elisp-test-loadable
 ** Failed Tests
-- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-summarize.el::test-et--report-results-saves-file][test-elisp-test-summarize.el]] :: test-et--report-results-saves-file
 ** Timeout Tests
-- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-summarize.el::test-et--report-results-saves-file][test-elisp-test-summarize.el]] :: test-et--report-results-saves-file
 ** Not Found Tests
-- [[file:/home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-summarize.el::test-et--report-results-saves-file][test-elisp-test-summarize.el]] :: test-et--report-results-saves-file
