@@ -1,6 +1,6 @@
 ;;; -*- coding: utf-8; lexical-binding: t -*-
 ;;; Author: ywatanabe
-;;; Timestamp: <2025-02-25 01:11:05>
+;;; Timestamp: <2025-02-25 05:06:13>
 ;;; File: /home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-main.el
 
 ;;; test-elisp-test-main.el --- Tests for elisp-test-main.el -*- lexical-binding: t; -*-
@@ -13,12 +13,16 @@
   "Test the `et-test` function."
   ;; Since `et-test` is interactive and prompts the user, we'll need to simulate
   ;; user input. We can use `cl-letf` to override `yes-or-no-p`.
+
   (let
-      ((test-dir
+      ((results-org-path-orig
+        et-results-org-path-switched)
+       (test-dir
         (make-temp-file "et-test-dir" t))
        (test-file
         (make-temp-file "et-test-file" nil ".el"))
        (test-code "(ert-deftest sample-test () (should t))"))
+    (setq et-results-org-path-switched et-results-org-path)
     (unwind-protect
         (progn
           ;; Write test code to temp file
@@ -38,6 +42,7 @@
             ;; We can check if the results buffer exists, or check other side effects.
             ))
       ;; Cleanup
+      (setq et-results-org-path-switched results-org-path-orig)
       (delete-directory test-dir t))))
 
 (provide 'test-elisp-test-main)

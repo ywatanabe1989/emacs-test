@@ -1,6 +1,6 @@
 ;;; -*- coding: utf-8; lexical-binding: t -*-
 ;;; Author: ywatanabe
-;;; Timestamp: <2025-02-25 01:09:54>
+;;; Timestamp: <2025-02-25 03:12:51>
 ;;; File: /home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-find.el
 
 (ert-deftest test--et-find-deftest-file

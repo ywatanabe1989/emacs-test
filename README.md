@@ -1,5 +1,5 @@
 <!-- ---
-!-- Timestamp: 2025-02-25 02:09:56
+!-- Timestamp: 2025-02-25 03:23:13
 !-- Author: ywatanabe
 !-- File: /home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/README.md
 !-- --- -->
@@ -67,7 +67,7 @@ Customize through M-x customize-group RET elisp-test:
 - `et-timeout-sec`: Test timeout (default: 10s)
 - `et-test-file-expressions`: Test file patterns
 - `et-test-file-exclude-expressions`: Exclusion patterns
-- `et-results-file`: Results save location
+- `et-results-org-path`: Results save location
 
 ## License
 
