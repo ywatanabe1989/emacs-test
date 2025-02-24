@@ -1,0 +1,70 @@
+Running 23 tests (2025-02-25 02:02:20+1100, selector ‘t’)
+   passed   1/23  test--et-find-deftest-file (0.001181 sec)
+   passed   2/23  test-elisp-test-find-loadable (0.000071 sec)
+   passed   3/23  test-elisp-test-loadable (0.000056 sec)
+   passed   4/23  test-elisp-test-main-loadable (0.000042 sec)
+   passed   5/23  test-elisp-test-path-loadable (0.000044 sec)
+   passed   6/23  test-elisp-test-run-loadable (0.000054 sec)
+   passed   7/23  test-elisp-test-summarize-loadable (0.000058 sec)
+   passed   8/23  test-elisp-test-variables-loadable (0.000055 sec)
+Ran 1 tests, 1 results were as expected
+   passed   9/23  test-et--run-multiple-test-basic (0.002969 sec)
+Aborted: Ran 1 tests, 0 results were as expected
+   passed  10/23  test-et--run-single-test-error (0.002013 sec)
+   passed  11/23  test-et--run-single-test-not-found (0.000358 sec)
+Ran 1 tests, 1 results were as expected
+   passed  12/23  test-et--run-single-test-success (0.002266 sec)
+Aborted: Ran 1 tests, 0 results were as expected
+   passed  13/23  test-et--run-single-test-timeout (1.003304 sec)
+Test test-et--summarize-results-save backtrace:
+  signal(ert-test-failed (((should (> (buffer-size) 0)) :form (> 0 0) 
+  ert-fail(((should (> (buffer-size) 0)) :form (> 0 0) :value nil))
+  (if (unwind-protect (setq value-115 (apply fn-113 args-114)) (setq f
+  (let (form-description-117) (if (unwind-protect (setq value-115 (app
+  (let ((value-115 'ert-form-evaluation-aborted-116)) (let (form-descr
+  (let* ((fn-113 #'>) (args-114 (condition-case err (let ((signal-hook
+  (progn (insert-file-contents temp-results-file) (let* ((fn-113 #'>) 
+  (unwind-protect (progn (insert-file-contents temp-results-file) (let
+  (save-current-buffer (set-buffer temp-buffer) (unwind-protect (progn
+  (let ((temp-buffer (generate-new-buffer " *temp*" t))) (save-current
+  (progn (write-region "" nil temp-results-file nil nil nil 'excl) (le
+  (unwind-protect (progn (write-region "" nil temp-results-file nil ni
+  (progn (fset 'y-or-n-p vnew) (unwind-protect (progn (write-region ""
+  (unwind-protect (progn (fset 'y-or-n-p vnew) (unwind-protect (progn 
+  (let* ((vnew #'(lambda (&rest _) t)) (old (symbol-function 'y-or-n-p
+  (let ((temp-results-file (expand-file-name "test-summary.org" tempor
+  (closure (t) nil (let ((temp-results-file (expand-file-name "test-su
+  ert--run-test-internal(#s(ert--test-execution-info :test ... :result
+  ert-run-test(#s(ert-test :name test-et--summarize-results-save :docu
+  ert-run-or-rerun-test(#s(ert--stats :selector t :tests ... :test-map
+  ert-run-tests(t #f(compiled-function (event-type &rest event-args) #
+  ert-run-tests-batch(nil)
+  ert-run-tests-batch-and-exit()
+  command-line-1(("-l" "ert" "-l" "package" "--eval" "(progn          
+  command-line()
+  normal-top-level()
+Test test-et--summarize-results-save condition:
+    (ert-test-failed
+     ((should
+       (>
+	(buffer-size)
+	0))
+      :form
+      (> 0 0)
+      :value nil))
+   FAILED  14/23  test-et--summarize-results-save (1.861291 sec) at tests/test-elisp-test-summarize.el:38
+   passed  15/23  test-et--summarize-results-saves-file (0.006164 sec)
+   passed  16/23  test-et-add-load-paths-multiple (0.000435 sec)
+   passed  17/23  test-et-add-load-paths-single (0.000174 sec)
+   passed  18/23  test-et-buffer-name-defined (0.000088 sec)
+   passed  19/23  test-et-loadpath-defined (0.000085 sec)
+   passed  20/23  test-et-test-file-exclude-expressions-defined (0.000078 sec)
+   passed  21/23  test-et-test-file-expressions-defined (0.000110 sec)
+   passed  22/23  test-et-test-function (0.002145 sec)
+   passed  23/23  test-et-timeout-sec-defined (0.000171 sec)
+
+Ran 23 tests, 22 results as expected, 1 unexpected (2025-02-25 02:02:23+1100, 3.182793 sec)
+
+1 unexpected results:
+   FAILED  test-et--summarize-results-save
+
