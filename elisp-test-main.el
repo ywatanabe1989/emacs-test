@@ -1,62 +1,43 @@
 ;;; -*- coding: utf-8; lexical-binding: t -*-
 ;;; Author: ywatanabe
-;;; Timestamp: <2025-02-25 02:15:55>
+;;; Timestamp: <2025-02-25 06:33:54>
 ;;; File: /home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/elisp-test-main.el
 
 ;; Contains the main function to run tests.
 
 (defun et-test
-    (path)
+    (&rest root-paths)
+  "Run tests from specified ROOT-PATHS, marked files in dired, or current directory."
   (interactive)
+  (setq et-results-org-path-switched
+        (if
+            (eq major-mode 'dired-mode)
+            (expand-file-name et-results-org-path-dired default-directory)
+          et-results-org-path))
   (let*
-      ((tests
-        (et-find-deftest path))
-       (test-names
-        (make-hash-table :test 'equal)))
-    (when tests
-      (with-current-buffer
-          (get-buffer-create "*elisp-test-plan*")
-        (erase-buffer)
-        (org-mode)
-        (insert "* Found Tests\n\n")
-        (dolist
-            (test tests)
-          (let*
-              ((fullpath
-                (car test))
-               (testname
-                (cdr test))
-               (count
-                (1+
-                 (gethash testname test-names 0))))
-            (puthash testname count test-names)
-            (insert
-             (format "- [[file:%s::%s][%s]] %s\n"
-                     fullpath
-                     testname
-                     testname
-                     (if
-                         (> count 1)
-                         "[DUPLICATE]" "")))))
-        (org-overview)
-        (org-show-all)
-        (display-buffer
-         (current-buffer)))
-      (when
-          (yes-or-no-p "Proceed with running these tests? ")
-        (setq --et-test-alist tests)
-        (setq --et-single-test-results
-              (et--run-single-test
-               (car --et-test-alist)))
-        (setq --et-multiple-test-results
-              (et--run-multiple-test --et-test-alist))
-        (setq --et-summarized-results
-              (et--summarize-results --et-multiple-test-results))
-        --et-summarized-results))))
+      ((paths
+        (cond
+         ((eq major-mode 'dired-mode)
+          (--et-find-list-marked-paths-dired))
+         (root-paths root-paths)
+         (t
+          (list default-directory))))
+       (tests
+        (et--prepare-test-plan paths)))
+    (when
+        (and tests
+             (yes-or-no-p "Proceed with running these tests? "))
+      (let
+          ((test-results
+            (et--run-multiple-test tests)))
+        (et--report-results
+         (get-buffer-create "*elisp-test-results*")
+         test-results)))))
 
 ;; Example
 ;; (require 'elisp-test)
 ;; (et-test "~/proj/llemacs/llemacs.el/tests")
+;; (global-set-key (kbd "C-c C-t") #'et-test)
 
 (provide 'elisp-test-main)
 

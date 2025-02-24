@@ -1,6 +1,6 @@
 ;;; -*- coding: utf-8; lexical-binding: t -*-
 ;;; Author: ywatanabe
-;;; Timestamp: <2025-02-25 01:43:58>
+;;; Timestamp: <2025-02-25 05:29:24>
 ;;; File: /home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-run.el
 
 (require 'ert)
@@ -55,7 +55,7 @@
             (insert "(ert-deftest test-success () (should t))"))
           (should
            (string-match-p
-            "passed"
+            "PASSED"
             (nth 2
                  (et--run-single-test
                   (cons temp-file "test-success"))))))

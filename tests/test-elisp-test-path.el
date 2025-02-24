@@ -1,10 +1,10 @@
 ;;; -*- coding: utf-8; lexical-binding: t -*-
 ;;; Author: ywatanabe
-;;; Timestamp: <2025-02-25 01:40:40>
+;;; Timestamp: <2025-02-25 02:50:02>
 ;;; File: /home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/tests/test-elisp-test-path.el
 
 (require 'ert)
-(require 'elisp-test-path)
+(require 'elisp-test-loadpath)
 
 (ert-deftest test-et-add-load-paths-single
     ()
@@ -53,8 +53,6 @@
               load-path))))
       (setq et-loadpath original-loadpath
             load-path original-load-path))))
-
-(provide 'test-elisp-test-path)
 
 (provide 'test-elisp-test-path)
 

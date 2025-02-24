@@ -1,5 +1,5 @@
 <!-- ---
-!-- Timestamp: 2025-02-25 02:09:56
+!-- Timestamp: 2025-02-25 07:33:44
 !-- Author: ywatanabe
 !-- File: /home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/README.md
 !-- --- -->
@@ -10,19 +10,19 @@ A testing framework for Emacs Lisp projects that integrates with ERT (Emacs Lisp
 
 ## Features
 
-- Test file discovery with customizable patterns
-- Individual and batch test execution
-- Detailed test result reporting in Org format
-- Test timeout handling
+- Automated test discovery with customizable patterns
+- Interactive test execution through Dired or function calls
+- Detailed test results in [`Org-mode` format](./elisp-test-results.org) with [`PDF export`](elisp-test-results.pdf)
+- Test timeout handling and error reporting
 - Duplicate test detection
-- Integration with Dired for file selection
-- Command-line execution support
+- Load path management
+- Batch mode support for CI/CD
 
 ## Installation
 
-1. Clone this repository:
+1. Clone the repository:
 ```bash
-git clone https://github.com/ywatanabe/emacs-test.git ~/.emacs.d/lisp/emacs-test
+git clone https://github.com/username/emacs-test.git ~/.emacs.d/lisp/emacs-test
 ```
 
 2. Add to your init.el:
@@ -33,41 +33,47 @@ git clone https://github.com/ywatanabe/emacs-test.git ~/.emacs.d/lisp/emacs-test
 
 ## Usage
 
-### Interactive Use
+### Interactive Mode
 
-1. Run tests on a directory:
+1. Run tests on current directory:
 ```elisp
-(et-test "~/path/to/project")
+(et-test)
 ```
 
-2. Select test files in Dired:
-- Mark files with 'm'
-- Run `M-x et-find-test-files-dired`
-
-### Command-Line Use
-
-Create batch-run-tests.el:
+2. Run tests on specific path:
 ```elisp
-(setq ert-batch-print-level nil)
-(setq ert-batch-print-length nil)
-(load "/path/to/emacs-test.el")
-(et-test "/path/to/emacs-test")
-(kill-emacs 0)
+(et-test "~/projects/my-elisp-project/tests")
 ```
 
-Run:
-```bash
-emacs -batch -l batch-run-tests.el
-```
+3. Using Dired:
+   - Open directory in dired (`C-x d`)
+   - Mark test files with `m`
+   - Execute `M-x et-test`
 
-## Configuration
+### Configuration
 
-Customize through M-x customize-group RET elisp-test:
+Customize via `M-x customize-group RET elisp-test`:
 
 - `et-timeout-sec`: Test timeout (default: 10s)
 - `et-test-file-expressions`: Test file patterns
 - `et-test-file-exclude-expressions`: Exclusion patterns
-- `et-results-file`: Results save location
+- `et-results-org-path`: Results file location
+- `et-buffer-name`: Test buffer name
+
+### Batch Mode
+
+Create a `run-tests.el`:
+```elisp
+(setq ert-batch-print-level nil)
+(setq ert-batch-print-length nil)
+(load "~/.emacs.d/lisp/emacs-test/elisp-test.el")
+(et-test "~/path/to/tests")
+```
+
+Run from command line:
+```bash
+emacs -Q --batch -l run-tests.el
+```
 
 ## License
 

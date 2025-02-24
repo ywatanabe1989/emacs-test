@@ -1,6 +1,6 @@
 ;;; -*- coding: utf-8; lexical-binding: t -*-
 ;;; Author: ywatanabe
-;;; Timestamp: <2025-02-25 02:15:49>
+;;; Timestamp: <2025-02-25 06:58:03>
 ;;; File: /home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/elisp-test-find.el
 
 ;; Contains functions to discover test files and extract test definitions.
@@ -10,61 +10,129 @@
 
 (defun et-find-test-files
     (file-or-directory &optional include-hidden-p)
-  "Find all test files in FILE-OR-DIRECTORY matching `et-test-file-expressions`.
-
-  If INCLUDE-HIDDEN-P is non-nil, include hidden files."
+  "Find all test files in FILE-OR-DIRECTORY matching `et-test-file-expressions`."
+  (interactive "fSelect file or directory: ")
   (let*
-      ((full-path
+      ((file-or-directory-full-path
         (expand-file-name file-or-directory))
-       (test-dir
-        (if
-            (file-directory-p full-path)
-            (if
-                (string-match-p "/tests/?$" full-path)
-                full-path
-              (expand-file-name "tests" full-path))
-          full-path))
        (file-list
         '()))
     (if
-        (file-directory-p test-dir)
+        (file-directory-p file-or-directory-full-path)
         (dolist
             (pattern et-test-file-expressions)
           (setq file-list
                 (append file-list
-                        (directory-files-recursively test-dir pattern))))
-      (when
-          (cl-some
-           (lambda
-             (pattern)
-             (string-match-p pattern full-path))
-           et-test-file-expressions)
-        (setq file-list
-              (list full-path))))
-    ;; Exclude files matching exclude patterns
+                        (directory-files-recursively file-or-directory-full-path pattern t))))
+      (let
+          ((filename
+            (file-name-nondirectory file-or-directory-full-path)))
+        (dolist
+            (pattern et-test-file-expressions)
+          (when
+              (string-match-p pattern filename)
+            (setq file-list
+                  (list file-or-directory-full-path))))))
+
     (when et-test-file-exclude-expressions
       (setq file-list
             (seq-remove
              (lambda
                (file)
-               (cl-some
-                (lambda
-                  (pattern)
-                  (string-match-p pattern file))
-                et-test-file-exclude-expressions))
+               (let
+                   ((filename
+                     (file-name-nondirectory file)))
+                 (cl-some
+                  (lambda
+                    (pattern)
+                    (string-match-p pattern filename))
+                  et-test-file-exclude-expressions)))
              file-list)))
-    ;; Filter hidden files if required
+
     (unless include-hidden-p
       (setq file-list
             (seq-filter
              (lambda
                (file)
                (not
-                (string-match-p "/\\.[^/]*\\'" file)))
+                (string-match-p "^\\."
+                                (file-name-nondirectory file))))
              file-list)))
+
     file-list))
 
-(defun et-dired-list-marked-paths
+(defun et-find-test-files-dired
+    (&optional include-hidden-p)
+  "Find test files based on selected paths"
+  (interactive)
+  (when
+      (eq major-mode 'dired-mode)
+    (let*
+        ((marked-paths
+          (--et-find-list-marked-paths-dired))
+         (test-files
+          (when marked-paths
+            (mapcan
+             (lambda
+               (path)
+               (et-find-test-files path include-hidden-p))
+             marked-paths))))
+      ;; nil
+      (when test-files
+        (with-current-buffer
+            (get-buffer-create et-buffer-name)
+          (erase-buffer)
+          (insert
+           (mapconcat 'identity test-files "\n"))
+          (display-buffer
+           (current-buffer)))
+        (progn
+          (message "Found test files: %S" test-files)
+          test-files)))))
+
+;; (defun et-find-test-files-dired
+;;     (&optional include-hidden-p)
+;;   "Find test files based on selected paths"
+;;   (interactive)
+;;   (when
+;;       (eq major-mode 'dired-mode)
+;;     (let*
+;;         ((marked-paths
+;;           (--et-find-list-marked-paths-dired))
+;;          (test-files
+;;           (when marked-paths
+;;             (mapcan
+;;              (lambda
+;;                (path)
+;;                (if
+;;                    (file-directory-p path)
+;;                    (et-find-test-files path include-hidden-p)
+;;                  (when
+;;                      (cl-some
+;;                       (lambda
+;;                         (pattern)
+;;                         (string-match-p pattern
+;;                                         (file-name-nondirectory path)))
+;;                       et-test-file-expressions)
+;;                    (list path))))
+;;              marked-paths))))
+;;       (when test-files
+;;         (with-current-buffer
+;;             (get-buffer-create et-buffer-name)
+;;           (erase-buffer)
+;;           (insert
+;;            (mapconcat 'identity test-files "\n"))
+;;           (display-buffer
+;;            (current-buffer)))
+;;         (progn
+;;           (message "Found test files: %S" test-files)
+;;           test-files)))))
+
+;; Helper
+;; ----------------------------------------
+
+;; This works
+(defun --et-find-list-marked-paths-dired
     ()
   "Get list of marked files/directories in dired."
   (interactive)
@@ -73,26 +141,9 @@
     (let
         ((found
           (dired-get-marked-files)))
-      found)))
-
-(defun et-find-test-files-dired
-    ()
-  "Find test files based on selected paths"
-  (interactive)
-  (let*
-      ((marked-paths
-        (et-dired-list-marked-paths))
-       (test-files
-        (when marked-paths
-          (mapcan #'et-find-test-files marked-paths))))
-    (when test-files
-      (with-current-buffer
-          (get-buffer-create et-buffer-name)
-        (erase-buffer)
-        (insert
-         (mapconcat 'identity test-files "\n"))
-        (display-buffer(current-buffer)))
-      test-files)))
+      (progn
+        ;; (message "Marked Files: %S" found)
+        found))))
 
 ;; Deftest Finder
 ;; ----------------------------------------
@@ -114,7 +165,7 @@
          tests))
       tests)))
 
-(defun et-find-deftest
+(defun --et-find-deftest
     (&optional file-or-directory)
   "Find all ert-deftest forms in FILE-OR-DIRECTORY."
   (let*
