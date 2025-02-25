@@ -1,6 +1,6 @@
 ;;; -*- coding: utf-8; lexical-binding: t -*-
 ;;; Author: ywatanabe
-;;; Timestamp: <2025-02-25 06:29:58>
+;;; Timestamp: <2025-02-25 14:05:06>
 ;;; File: /home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/elisp-test-variables.el
 
 ;; This module defines variables used across the framework.
@@ -35,10 +35,10 @@
   :group 'elisp-test)
 
 (defcustom et-test-file-exclude-expressions
-  '("/\\.[^/]+/"        ; Hidden directories
-    "/\\.[^/]+$"        ; Hidden files
-    "/_[^/]+/"          ; Underscore directories
-    "/_[^/]+$")
+  '("/\\.[^/]*/"        ; Hidden directories
+    "/\\.[^/]*$"        ; Hidden files
+    "/_[^/]*/"          ; Underscore directories
+    "/_[^/]*$")
                                         ; Underscore files
   "List of regular expressions to exclude test files."
   :type

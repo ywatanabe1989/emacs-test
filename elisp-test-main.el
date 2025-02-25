@@ -1,6 +1,6 @@
 ;;; -*- coding: utf-8; lexical-binding: t -*-
 ;;; Author: ywatanabe
-;;; Timestamp: <2025-02-25 06:33:54>
+;;; Timestamp: <2025-02-25 14:36:25>
 ;;; File: /home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/elisp-test-main.el
 
 ;; Contains the main function to run tests.
@@ -19,7 +19,8 @@
         (cond
          ((eq major-mode 'dired-mode)
           (--et-find-list-marked-paths-dired))
-         (root-paths root-paths)
+         (root-paths
+          (et-find-test-files-multiple root-paths))
          (t
           (list default-directory))))
        (tests
@@ -34,9 +35,7 @@
          (get-buffer-create "*elisp-test-results*")
          test-results)))))
 
-;; Example
-;; (require 'elisp-test)
-;; (et-test "~/proj/llemacs/llemacs.el/tests")
+;; ;; Key Binding
 ;; (global-set-key (kbd "C-c C-t") #'et-test)
 
 (provide 'elisp-test-main)
