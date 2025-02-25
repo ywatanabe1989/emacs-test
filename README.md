@@ -4,7 +4,7 @@
 !-- File: /home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/README.md
 !-- --- -->
 
-# Emacs Test
+# Elisp Test
 
 A testing framework for Emacs Lisp projects that integrates with ERT (Emacs Lisp Regression Testing).
 
