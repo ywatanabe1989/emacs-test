@@ -1,5 +1,5 @@
 <!-- ---
-!-- Timestamp: 2025-02-25 07:33:44
+!-- Timestamp: 2025-02-25 15:22:12
 !-- Author: ywatanabe
 !-- File: /home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/README.md
 !-- --- -->
@@ -8,15 +8,18 @@
 
 A testing framework for Emacs Lisp projects that integrates with ERT (Emacs Lisp Regression Testing).
 
-## Features
+## Examples
+- Buffer Test
+  - [`elisp-test-results-buffer.org`](elisp-test-results-buffer.org)
+  - [`elisp-test-results-buffer.pdf`](elisp-test-results-buffer.pdf)
 
-- Automated test discovery with customizable patterns
-- Interactive test execution through Dired or function calls
-- Detailed test results in [`Org-mode` format](./elisp-test-results.org) with [`PDF export`](elisp-test-results.pdf)
-- Test timeout handling and error reporting
-- Duplicate test detection
-- Load path management
-- Batch mode support for CI/CD
+- Multiple Test Files and Multiple ERT Cases
+  - All Success
+    - [`elisp-test-results.org`](elisp-test-results.org)
+    - [`elisp-test-results.pdf`](elisp-test-results.pdf)
+  - With Failures
+    - [`elisp-test-results-with-error.org`](elisp-test-results-with-error.org)
+    - [`elisp-test-results-with-error.pdf`](elisp-test-results-with-error.pdf)
 
 ## Installation
 
@@ -33,7 +36,7 @@ git clone https://github.com/username/emacs-test.git ~/.emacs.d/lisp/emacs-test
 
 ## Usage
 
-### Interactive Mode
+#### Interactive Mode
 
 1. Run tests on current directory:
 ```elisp
@@ -42,25 +45,14 @@ git clone https://github.com/username/emacs-test.git ~/.emacs.d/lisp/emacs-test
 
 2. Run tests on specific path:
 ```elisp
-(et-test "~/projects/my-elisp-project/tests")
+(et-test "~/projects/my-elisp-project/test-example.el")
+(et-test "~/projects/my-elisp-project/tests/") ; apply to child test files recursively 
 ```
 
 3. Using Dired:
-   - Open directory in dired (`C-x d`)
-   - Mark test files with `m`
-   - Execute `M-x et-test`
+Mark test files/directories with `m` -> `M-x et-test`
 
-### Configuration
-
-Customize via `M-x customize-group RET elisp-test`:
-
-- `et-timeout-sec`: Test timeout (default: 10s)
-- `et-test-file-expressions`: Test file patterns
-- `et-test-file-exclude-expressions`: Exclusion patterns
-- `et-results-org-path`: Results file location
-- `et-buffer-name`: Test buffer name
-
-### Batch Mode
+#### Batch Mode
 
 Create a `run-tests.el`:
 ```elisp
@@ -74,6 +66,26 @@ Run from command line:
 ```bash
 emacs -Q --batch -l run-tests.el
 ```
+
+## Configurations
+
+#### Example Key Bindings
+
+``` elisp
+(global-set-key (kbd "C-c C-t") #'et-test)
+(global-set-key (kbd "C-M-t") #'elisp-test-buffer)
+```
+
+#### Custom Variables
+
+Customize via `M-x customize-group RET elisp-test`:
+
+- `et-timeout-sec`: Test timeout (default: 10s)
+- `et-test-file-expressions`: Test file patterns
+- `et-test-file-exclude-expressions`: Exclusion patterns
+- `et-results-org-path`: Results file location
+- `et-results-org-path-dired`: Results file location
+- `et-buffer-name`: Test buffer name
 
 ## License
 

@@ -1,6 +1,6 @@
 ;;; -*- coding: utf-8; lexical-binding: t -*-
 ;;; Author: ywatanabe
-;;; Timestamp: <2025-02-25 07:05:34>
+;;; Timestamp: <2025-02-25 14:33:09>
 ;;; File: /home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/elisp-test-report.el
 
 ;; Reports test results.
@@ -72,6 +72,7 @@
           (when buf
             (display-buffer buf)
             (with-current-buffer buf
+              (org-fold-show-all)
               (org-latex-export-to-pdf)
               (let
                   ((tex-file
@@ -85,36 +86,6 @@
 ;; Helpers
 ;; ----------------------------------------
 
-;; (defun et--count-results
-;;     (results test-names)
-;;   "Count totals from test RESULTS, updating TEST-NAMES hash table."
-;;   (let
-;;       ((total-passed 0)
-;;        (total-failed 0)
-;;        (total-skipped 0)
-;;        (total-timeout 0))
-;;     (dolist
-;;         (result results)
-;;       (let*
-;;           ((test-name
-;;             (cadr result))
-;;            (output
-;;             (nth 2 result))
-;;            (counts
-;;             (et--parse-test-result output)))
-;;         (cl-incf total-passed
-;;                  (nth 0 counts))
-;;         (cl-incf total-failed
-;;                  (nth 1 counts))
-;;         (cl-incf total-skipped
-;;                  (nth 2 counts))
-;;         (cl-incf total-timeout
-;;                  (nth 3 counts))
-;;         (puthash test-name
-;;                  (1+
-;;                   (gethash test-name test-names 0))
-;;                  test-names)))
-;;     (list total-passed total-failed total-skipped total-timeout)))
 (defun et--count-results
     (results test-names)
   "Count totals from test RESULTS, updating TEST-NAMES hash table."
@@ -148,6 +119,7 @@
          ((string-prefix-p "ERROR:" output)
           (cl-incf total-failed)))))
     (list total-passed total-failed total-skipped total-timeout)))
+
 (defun et--count-duplicates
     (test-names)
   "Count duplicate test names in TEST-NAMES hash table."
@@ -197,6 +169,38 @@
       (insert
        (format "- Success Rate: %.1f%%\n\n" success-rate)))))
 
+;; (defun et--insert-test-section
+;;     (buffer results test-names condition section-title)
+;;   "Insert test section into BUFFER for tests matching CONDITION."
+;;   (with-current-buffer buffer
+;;     (insert
+;;      (format "** %s\n" section-title))
+;;     (dolist
+;;         (result results)
+;;       (let
+;;           ((output
+;;             (nth 2 result)))
+;;         (when
+;;             (and output
+;;                  (funcall condition output))
+;;           (let*
+;;               ((test-name
+;;                 (cadr result))
+;;                (duplicate-tag
+;;                 (if
+;;                     (>
+;;                      (gethash test-name test-names 0)
+;;                      1)
+;;                     " [DUPLICATE]" "")))
+;;             (insert
+;;              (format "- [[file:%s::%s][%s]] :: %s%s\n"
+;;                      (car result)
+;;                      test-name
+;;                      (file-name-nondirectory
+;;                       (car result))
+;;                      test-name
+;;                      duplicate-tag))))))))
+
 (defun et--insert-test-section
     (buffer results test-names condition section-title)
   "Insert test section into BUFFER for tests matching CONDITION."
@@ -227,7 +231,28 @@
                      (file-name-nondirectory
                       (car result))
                      test-name
-                     duplicate-tag))))))))
+                     duplicate-tag))
+            ;; Add error details for failed tests
+            (when
+                (string-match-p "\\(ERROR\\|FAILED\\)" output)
+              (if
+                  (string-match "FAILED:\\s-*\\(.*\\)" output)
+                  (let
+                      ((error-details
+                        (match-string 1 output)))
+                    (insert "  + Error details:\n")
+                    (insert
+                     (format "    %s\n"
+                             (string-trim error-details))))
+                (when
+                    (string-match "ERROR:\\s-*\\(.*\\)" output)
+                  (let
+                      ((error-details
+                        (match-string 1 output)))
+                    (insert "  + Error details:\n")
+                    (insert
+                     (format "    %s\n"
+                             (string-trim error-details)))))))))))))
 
 (provide 'elisp-test-report)
 
