@@ -11,8 +11,8 @@
 A testing framework for Emacs Lisp projects that integrates with ERT (Emacs Lisp Regression Testing).
 
 ## Examples
-[`example-multiple.org`](./examples/elisp-test-results-with-error.org)
-[`example-multiple.pdf`](./examples/elisp-test-results-with-error.pdf)
+- [`example-multiple.org`](./examples/elisp-test-results-with-error.org)
+- [`example-multiple.pdf`](./examples/elisp-test-results-with-error.pdf)
 
 ## Installation
 
@@ -31,19 +31,14 @@ git clone https://github.com/username/emacs-test.git ~/.emacs.d/lisp/emacs-test
 
 #### Interactive Mode
 
-1. Run tests on current directory:
-```elisp
-(et-test)
-```
 
-2. Run tests on specific path:
 ```elisp
-(et-test "~/projects/my-elisp-project/test-example.el")
-(et-test "~/projects/my-elisp-project/tests/") ; apply to child test files recursively 
+(et-test) ; Run tests on current directory
+(et-test "~/projects/my-elisp-project/test-example.el") ; Run tests on specific path
+(et-test "~/projects/my-elisp-project/tests/") ; Run tests on child paths
+;; In dired
+;; Mark test files/directories with `m` -> `M-x et-test`
 ```
-
-3. Using Dired:
-Mark test files/directories with `m` -> `M-x et-test`
 
 #### Batch Mode
 
@@ -69,9 +64,7 @@ emacs -Q --batch -l run-tests.el
 (global-set-key (kbd "C-M-t") #'elisp-test-buffer)
 ```
 
-#### Custom Variables
-
-Customize via `M-x customize-group RET elisp-test`:
+#### Customizable Variables
 
 - `et-timeout-sec`: Test timeout (default: 10s)
 - `et-test-file-expressions`: Test file patterns
