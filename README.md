@@ -1,5 +1,5 @@
 <!-- ---
-!-- Timestamp: 2025-02-25 15:22:12
+!-- Timestamp: 2025-02-25 15:27:42
 !-- Author: ywatanabe
 !-- File: /home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/README.md
 !-- --- -->
@@ -10,16 +10,12 @@ A testing framework for Emacs Lisp projects that integrates with ERT (Emacs Lisp
 
 ## Examples
 - Buffer Test
-  - [`elisp-test-results-buffer.org`](elisp-test-results-buffer.org)
-  - [`elisp-test-results-buffer.pdf`](elisp-test-results-buffer.pdf)
+  - [`example-buffer.org`](./examples/elisp-test-results-buffer.org)
+  - [`example-buffer.pdf`](./examples/elisp-test-results-buffer.pdf)
 
 - Multiple Test Files and Multiple ERT Cases
-  - All Success
-    - [`elisp-test-results.org`](elisp-test-results.org)
-    - [`elisp-test-results.pdf`](elisp-test-results.pdf)
-  - With Failures
-    - [`elisp-test-results-with-error.org`](elisp-test-results-with-error.org)
-    - [`elisp-test-results-with-error.pdf`](elisp-test-results-with-error.pdf)
+  - [`example-multiple.org`](./examples/elisp-test-results-with-error.org)
+  - [`example-multiple.pdf`](./examples/elisp-test-results-with-error.pdf)
 
 ## Installation
 
