@@ -9,13 +9,8 @@
 A testing framework for Emacs Lisp projects that integrates with ERT (Emacs Lisp Regression Testing).
 
 ## Examples
-- Buffer Test
-  - [`example-buffer.org`](./examples/elisp-test-results-buffer.org)
-  - [`example-buffer.pdf`](./examples/elisp-test-results-buffer.pdf)
-
-- Multiple Test Files and Multiple ERT Cases
-  - [`example-multiple.org`](./examples/elisp-test-results-with-error.org)
-  - [`example-multiple.pdf`](./examples/elisp-test-results-with-error.pdf)
+[`example-multiple.org`](./examples/elisp-test-results-with-error.org)
+[`example-multiple.pdf`](./examples/elisp-test-results-with-error.pdf)
 
 ## Installation
 
