@@ -6,7 +6,7 @@
 
 # Elisp Test
 
-[![Build Status](https://github.com/ywatanabe1989/emacs-header-footer-manager/workflows/tests/badge.svg)](https://github.com/ywatanabe1989/emacs-header-footer-manager/actions)
+[![Build Status](https://github.com/ywatanabe1989/elisp-test/workflows/tests/badge.svg)](https://github.com/ywatanabe1989/elisp-test/actions)
 
 A testing framework for Emacs Lisp projects that integrates with ERT (Emacs Lisp Regression Testing).
 
