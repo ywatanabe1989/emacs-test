@@ -1,6 +1,6 @@
 ;;; -*- coding: utf-8; lexical-binding: t -*-
 ;;; Author: ywatanabe
-;;; Timestamp: <2025-02-25 14:36:25>
+;;; Timestamp: <2025-02-26 15:47:30>
 ;;; File: /home/ywatanabe/.dotfiles/.emacs.d/lisp/emacs-test/elisp-test-main.el
 
 ;; Contains the main function to run tests.
@@ -27,7 +27,9 @@
         (et--prepare-test-plan paths)))
     (when
         (and tests
-             (yes-or-no-p "Proceed with running these tests? "))
+             (yes-or-no-p
+              (format "Proceed with running these %s tests? "
+                      (length tests))))
       (let
           ((test-results
             (et--run-multiple-test tests)))
